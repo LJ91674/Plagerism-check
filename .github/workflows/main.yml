@@ -9,7 +9,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4  # Update to v4 for Node.js support
+
+    - name: Setup Java
+      uses: actions/setup-java@v3  # Use version 3 for Java
+      with:
+        java-version: "11"  # Ensure correct Java version is set
 
     - name: Install JPlag
       run: |
@@ -18,5 +23,5 @@ jobs:
 
     - name: Run JPlag
       run: |
-        java -jar jplag.jar -l python -r ./results ./  # Replace "python" with your language
-        ls results  # Check output directory
+        java -jar jplag.jar -l python -r ./results ./  # Replace 'python' with your language
+        ls results
