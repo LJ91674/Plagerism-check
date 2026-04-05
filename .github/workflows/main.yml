@@ -1,0 +1,22 @@
+name: "Plagiarism Check"
+
+on:
+  push:  # Run this workflow whenever code is pushed
+
+jobs:
+  check-plagiarism:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install JPlag
+      run: |
+        mkdir results
+        wget https://github.com/jplag/JPlag/releases/download/v2.11.9/jplag-2.11.9-SNAPSHOT-jar-with-dependencies.jar -O jplag.jar
+
+    - name: Run JPlag
+      run: |
+        java -jar jplag.jar -l python -r ./results ./  # Replace "python" with your language
+        ls results  # Check output directory
